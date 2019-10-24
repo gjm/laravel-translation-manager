@@ -11,6 +11,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Barryvdh\TranslationManager\Models\Translation;
 use Barryvdh\TranslationManager\Models\TranslationNamespace;
 use Barryvdh\TranslationManager\Events\TranslationsExportedEvent;
+use Symfony\Component\VarExporter\VarExporter;
 
 class Manager
 {
@@ -345,7 +346,7 @@ class Manager
 
                         $path = $path.DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR.$group.'.php';
 
-                        $output = "<?php\n\nreturn ".var_export($translations, true).';'.\PHP_EOL;
+                        $output = "<?php\n\nreturn ".VarExporter::export($translations).';'.\PHP_EOL;
                         $this->files->put($path, $output);
                     }
                 }
