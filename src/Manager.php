@@ -321,13 +321,13 @@ class Manager
                         $translations = $groups[$group_name];
                         $path = $this->app['path.lang'];
 
-                        if (Str::contains($group, '::')) {
-                            list($namespace, $group) = explode('::', $group, 2);
+                        if (Str::contains($group_name, '::')) {
+                            list($namespace, $group) = explode('::', $group_name, 2);
                             $path = $namespaces[$namespace] ?? $this->app['path.lang'];
                         }
 
                         if ($vendor) {
-                            list($package, $group) = explode('/', Str::after($group, 'vendor/'), 2);
+                            list($package, $group) = explode('/', Str::after($group_name, 'vendor/'), 2);
                             $path = $basePath . DIRECTORY_SEPARATOR .'vendor'. DIRECTORY_SEPARATOR . $package;
                         }
                         $locale_path = $locale.DIRECTORY_SEPARATOR.$group;
